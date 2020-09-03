@@ -1,9 +1,39 @@
+var EVENT_START_DATE = new Date(2020, 09, 04, 15)
+var EVENT_END_DATE = new Date(2020, 09, 04, 23)
+
 
 $(document).ready(function() {
+
+    generateCovid();
     $('.covid').each(function(idx, e) {
         animateCovid($(e));
     });
 });
+
+var MIN_COVIDS = 5;
+var MAX_COVIDS = 50;
+function calculateNumberOfCovids() {
+
+    if(Date.now() < EVENT_END_DATE) {
+        return MIN_COVIDS;
+    }
+
+    if(Date.now() > EVENT_END_DATE) {
+        return MAX_COVIDS;
+    }
+
+    var div = (EVENT_END_DATE - EVENT_START_DATE) / MAX_COVIDS;
+    if (Date.now() > EVENT_START_DATE) {
+        return MIN_COVIDS + MAX_COVIDS - ((EVENT_END_DATE - Date.now()) / div);
+    }
+}
+
+function generateCovid() {
+    var numberOfCovids = calculateNumberOfCovids();
+    for (var n = 0; n < numberOfCovids; ++ n) {
+        $("body").append("<img src='images/covid.png' class='covid' width='100' heigh='100' />")
+    }
+}
 
 function makeNewPosition($container) {
 
