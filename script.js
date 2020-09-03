@@ -2,25 +2,34 @@ var EVENT_START_DATE = new Date(2020, 08, 04, 15)
 var EVENT_END_DATE = new Date(2020, 08, 04, 23)
 
 
-$(document).ready(function() {
-
+$(document).ready(function () {
+    initSound();
     generateCovid();
-    setInterval(generateCovid, 1000*60);
+    setInterval(generateCovid, 1000 * 60);
 
-    $('.covid').each(function(idx, e) {
+    $('.covid').each(function (idx, e) {
         animateCovid($(e));
     });
 });
+
+function initSound() {
+    var player = new Howl({
+        src: ['mp3/carvalhesa.mp3'],
+        autoplay: true,
+        loop: true,
+        volume: 0.5
+    });
+}
 
 var MIN_COVIDS = 5;
 var MAX_COVIDS = 50;
 function calculateNumberOfCovids() {
 
-    if(Date.now() < EVENT_END_DATE) {
+    if (Date.now() < EVENT_END_DATE) {
         return MIN_COVIDS;
     }
 
-    if(Date.now() > EVENT_END_DATE) {
+    if (Date.now() > EVENT_END_DATE) {
         return MAX_COVIDS;
     }
 
@@ -33,12 +42,12 @@ function calculateNumberOfCovids() {
 function generateCovid() {
     var numberOfCovids = calculateNumberOfCovids();
     var existingCovids = $('.covid').length;
-    if(numberOfCovids <= existingCovids) {
+    if (numberOfCovids <= existingCovids) {
         return;
     }
 
     var createCovids = numberOfCovids - existingCovids;
-    for (var n = 0; n < createCovids; ++ n) {
+    for (var n = 0; n < createCovids; ++n) {
         $("body").append("<img src='images/covid.png' class='covid' width='100' heigh='100' />")
     }
 }
@@ -65,7 +74,7 @@ function animateCovid($target) {
     $($target).animate({
         top: newq[0],
         left: newq[1]
-    }, speed, function() {
+    }, speed, function () {
         animateCovid($target);
     });
 
