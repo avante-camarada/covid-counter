@@ -1,5 +1,5 @@
 var EVENT_START_DATE = new Date(2020, 08, 04, 15)
-var EVENT_END_DATE = new Date(2020, 08, 04, 23)
+var EVENT_END_DATE = new Date(2020, 08, 06, 23)
 
 
 $(document).ready(function () {
@@ -25,7 +25,7 @@ var MIN_COVIDS = 5;
 var MAX_COVIDS = 50;
 function calculateNumberOfCovids() {
 
-    if (Date.now() < EVENT_END_DATE) {
+    if (Date.now() < EVENT_START_DATE) {
         return MIN_COVIDS;
     }
 
@@ -34,9 +34,7 @@ function calculateNumberOfCovids() {
     }
 
     var div = (EVENT_END_DATE - EVENT_START_DATE) / MAX_COVIDS;
-    if (Date.now() > EVENT_START_DATE) {
-        return MIN_COVIDS + MAX_COVIDS - ((EVENT_END_DATE - Date.now()) / div);
-    }
+    return MIN_COVIDS + MAX_COVIDS - ((EVENT_END_DATE - Date.now()) / div);
 }
 
 function generateCovid() {
