@@ -1,5 +1,5 @@
-var EVENT_START_DATE = new Date(2020, 09, 04, 15)
-var EVENT_END_DATE = new Date(2020, 09, 04, 23)
+var EVENT_START_DATE = new Date(2020, 08, 04, 15)
+var EVENT_END_DATE = new Date(2020, 08, 04, 23)
 
 
 $(document).ready(function() {

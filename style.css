@@ -1,5 +1,5 @@
 body {
-    background: url('images/background.jpeg') no-repeat;
+    background: url('images/background.jpeg') no-repeat center fixed;
     background-size: cover;
 }
 
@@ -8,3 +8,45 @@ body {
     top: -200px;
     left: -100px
 }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    font-weight: normal;
+  }
+  
+  li {
+    display: inline-block;
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 1em;
+    text-transform: uppercase;
+  }
+  
+  li span {
+    display: block;
+    font-size: 4.5rem;
+  }
+  
+  /* general styling */
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .countdown {
+      color: white;
+      font-weight: bolder;
+      font-stretch: wider;
+      font-size: 1em;
+    margin: 0 auto;
+    padding: 0.5rem;
+    text-align: center;
+    display: none;
+    margin-top: 50px;
+
+  }
