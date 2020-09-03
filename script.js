@@ -5,6 +5,8 @@ var EVENT_END_DATE = new Date(2020, 08, 04, 23)
 $(document).ready(function() {
 
     generateCovid();
+    setInterval(generateCovid, 1000*60);
+
     $('.covid').each(function(idx, e) {
         animateCovid($(e));
     });
@@ -30,7 +32,13 @@ function calculateNumberOfCovids() {
 
 function generateCovid() {
     var numberOfCovids = calculateNumberOfCovids();
-    for (var n = 0; n < numberOfCovids; ++ n) {
+    var existingCovids = $('.covid').length;
+    if(numberOfCovids <= existingCovids) {
+        return;
+    }
+
+    var createCovids = numberOfCovids - existingCovids;
+    for (var n = 0; n < createCovids; ++ n) {
         $("body").append("<img src='images/covid.png' class='covid' width='100' heigh='100' />")
     }
 }
