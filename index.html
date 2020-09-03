@@ -10,36 +10,43 @@
   <body>
 
     <div class="container">
-      <div class="row">
-        <div></div>  
-        <div id="start_countdown" class="col countdown">  
-          <div class="">
-            <h1>A festa começa em:</h1>
-            <ul>
-              <li><span id="days_start"></span>Dias</li>
-              <li><span id="hours_start"></span>Horas</li>
-              <li><span id="minutes_start"></span>Minutos</li>
-              <li><span id="seconds_start"></span>Segundos</li>
-            </ul>
+    <div class="row">
+
+        <div class="col-12">
+          <div id="start_countdown" class="col countdown">  
+            <div class="">
+              <h1>A festa começa em:</h1>
+              <ul>
+                <li><span id="days_start"></span>Dias</li>
+                <li><span id="hours_start"></span>Horas</li>
+                <li><span id="minutes_start"></span>Minutos</li>
+                <li><span id="seconds_start"></span>Segundos</li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="end_countdown" class="col countdown">  
+            <div class="">
+              <h1>A festa termina em:</h1>
+              <ul>
+                <li><span id="days_end"></span>Dias</li>
+                <li><span id="hours_end"></span>Horas</li>
+                <li><span id="minutes_end"></span>Minutos</li>
+                <li><span id="seconds_end"></span>Segundos</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="row">  
-        <div id="end_countdown" class="col countdown">  
-          <div class="">
-            <h1>A festa termina em:</h1>
-            <ul>
-              <li><span id="days_end"></span>Dias</li>
-              <li><span id="hours_end"></span>Horas</li>
-              <li><span id="minutes_end"></span>Minutos</li>
-              <li><span id="seconds_end"></span>Segundos</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
     </div>
+    
+      
+    
+    </div>
+
+    <div class="infected">
+          Casos confirmados: 
+          <span class="counter"></span>
+      </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
@@ -47,5 +54,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
      <script src="script.js"></script> 
      <script src="countdown.js"></script> 
+     <script src="covidCases.js"></script> 
   </body>
 </html>
