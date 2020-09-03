@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 function initSound() {
     var player = new Howl({
-        src: ['/mp3/carvalhesa.mp3'],
+        src: ['mp3/carvalhesa.mp3'],
         autoplay: true,
         loop: true,
         volume: 0.5
