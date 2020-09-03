@@ -19,6 +19,7 @@ function initSound() {
         loop: true,
         volume: 0.5
     });
+    player.seek(27);
 }
 
 var MIN_COVIDS = 5;
