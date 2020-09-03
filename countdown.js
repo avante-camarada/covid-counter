@@ -9,6 +9,14 @@ let countDown_start = EVENT_START_DATE.getTime();
 let countDown_end = EVENT_END_DATE.getTime();
 
 function calculateTime() {
+    if(Date.now() > EVENT_END_DATE) {
+        $("#start_countdown").hide();
+        $("#end_countdown").hide();
+        $("#end_party").show();
+
+        return;
+    }
+
     if(Date.now() < EVENT_START_DATE) {
         $("#start_countdown").show();
 
