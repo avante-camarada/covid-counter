@@ -10,6 +10,10 @@ $(document).ready(function () {
     $('.covid').each(function (idx, e) {
         animateCovid($(e));
     });
+    $('#start-game').click(function (e) {
+        alert('Vamos infectar os camaradas todos.');
+        startGame();
+    });
 });
 
 function initSound() {
@@ -92,3 +96,107 @@ function calcSpeed(prev, next) {
 
     return speed;
 }
+
+/************** INFECTA O CAMARADA */
+var score = 0;
+var color = "blue";
+
+function random(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+}
+
+function setBG() {
+    if (Math.round(Math.random())) {
+        return "/game/img/corona.png";
+    } else {
+        return "/game/img/ze-povinho.png";
+    }
+}
+
+
+
+function dropBox() {
+    var length = random(100, ($(".game").width() - 100));
+    var velocity = random(850, 10000);
+    var size = random(50, 150);
+    var thisBox = $("<div/>", {
+        class: "box",
+        style: "width:" + size + "px; height:" + size + "px; left:" + length + "px; transition: transform " + velocity + "ms linear;"
+    });
+
+    //set data and bg based on data
+    thisBox.data("test", Math.round(Math.random()));
+    if (thisBox.data("test")) {
+        thisBox.css({ "background": "url('http://www.festadocovid.com/game/img/corona.png')", "background-size": "contain" });
+    } else {
+        thisBox.css({ "background": "url('http://www.festadocovid.com/game/img/ze-povinho.png')", "background-size": "contain" });
+    }
+
+
+    //insert gift element
+    $(".game").append(thisBox);
+
+    //random start for animation
+    setTimeout(function () {
+        thisBox.addClass("move");
+    }, random(0, 5000));
+
+    //remove this object when animation is over
+    thisBox.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend",
+        function (event) {
+            $(this).remove();
+        });
+}
+
+
+$(document).on('click', '.box', function () {
+
+
+    if ($(this).data("test")) {
+        score += 1;
+    } else {
+        score -= 1;
+    }
+
+    $(".score").html(score);
+    $(this).remove();
+});
+
+
+
+function countdown() {
+    var seconds = 5;
+    function tick() {
+        var counter = document.getElementById("counter");
+        seconds--;
+        counter.innerHTML = (seconds < 10 ? "0" : "") + String(seconds) + "S";
+        if (seconds > 0) {
+            setTimeout(tick, 1000);
+            draw();
+            update();
+        } else {
+            alert("Game over");
+            clearInterval(runGame);
+            $('.game').hide();
+        }
+    }
+    tick();
+}
+
+var runGame = setInterval(function () {
+    for (i = 0; i < 10; i++) {
+        dropBox();
+    }
+}, 5000);
+
+function startGame() {
+    $('.game').show();
+    for (i = 0; i < 10; i++) {
+        dropBox();
+    }
+
+    countdown();
+}
+
+
+
