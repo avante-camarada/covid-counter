@@ -77,7 +77,7 @@ function finishGame(){
 	clearInterval( runGame );
 	runGame = 0;
 
-	alert("Game over !\n" + score + " covidados.");
+	alert("Game over !\n" + score + " COVIDados.");
 }
 
 
@@ -86,7 +86,9 @@ function startGame(){
 	  dropBox();
 	}
 
-	runGame = setInterval( function(){
+	runGame =
+		setInterval(
+			function(){
                 for (i = 0; i < 5; i++) { 
                   dropBox();
                 }  
