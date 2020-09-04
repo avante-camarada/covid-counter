@@ -1,18 +1,10 @@
+var runGame = 0;
 var score = 0;
-var color = "blue";
+
 
 function random(min,max){
  	return Math.round(Math.random() * (max-min) + min);
 }
-
-function setBG(){
-  if (Math.round(Math.random())){
-    return "/game/img/corona.png";
-  } else {
-    return "/game/img/ze-povinho.png";
-  }
-}
-
 
 
 function dropBox(){
@@ -32,8 +24,7 @@ function dropBox(){
     thisBox.css({"background": "url('http://www.festadocovid.com/game/img/ze-povinho.png')", "background-size":"contain"});
   }
   
-  
-  //insert gift element
+  //insert box element
   $(".game").append(thisBox);
   
   //random start for animation
@@ -43,17 +34,13 @@ function dropBox(){
   
   //remove this object when animation is over
   thisBox.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend",
-              function(event) {
-    $(this).remove();
-  });
+    function(event) {
+    	$(this).remove();
+  	});
 }
 
-for (i = 0; i < 10; i++) { 
-  dropBox();
-}
 
 $(document).on('click', '.box', function(){
-
   
   if($(this).data("test")){
     score += 1;
@@ -65,26 +52,45 @@ $(document).on('click', '.box', function(){
   $(this).remove();
 });
 
-var runGame = setInterval(function(){
-                for (i = 0; i < 10; i++) { 
-                  dropBox();
-                }  
-              }, 5000);
 
 function countdown() {
     	var seconds = 60;
+
 	    function tick() {
 	        var counter = document.getElementById("counter");
+
 	        seconds--;
 	        counter.innerHTML = (seconds < 10 ? "0" : "")  + String(seconds) + " S";
+
 	        if( seconds > 0 ) {
 	            setTimeout(tick, 1000);
-	            //draw();
-	   			//update();
 	        } else {
-	            clearInterval(runGame);
-	            alert("Game over");
+	        	finishGame();
 	        }
 	    }
+
     	tick();
 	}
+
+
+function finishGame(){
+	clearInterval( runGame );
+	runGame = 0;
+
+	alert("Game over !\n" + score + " covidados.");
+}
+
+
+function startGame(){
+	for (i = 0; i < 10; i++) { 
+	  dropBox();
+	}
+
+	runGame = setInterval( function(){
+                for (i = 0; i < 5; i++) { 
+                  dropBox();
+                }  
+            }, 2500);
+
+	countdown();
+}
