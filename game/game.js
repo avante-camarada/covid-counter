@@ -77,7 +77,7 @@ function finishGame(){
 	clearInterval( runGame );
 	runGame = 0;
 
-	alert( score + " Zé Povinho salvo" + ((score==1 || score==-1 )? "" : "s") + " do COVID.\n\nGame over !");
+	alert( score + " Zé Povinho\nsalvo" + ((score==1 || score==-1 )? "" : "s") + " do COVID.\n\nGame over !");
 }
 
 
