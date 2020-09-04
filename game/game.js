@@ -19,9 +19,9 @@ function dropBox(){
   //set data and bg based on data
   thisBox.data("test", Math.round(Math.random()));
   if(thisBox.data("test")){
-    thisBox.css({"background": "url('http://www.festadocovid.com/game/img/corona.png')", "background-size":"contain"});
-  } else {
     thisBox.css({"background": "url('http://www.festadocovid.com/game/img/ze-povinho.png')", "background-size":"contain"});
+  } else {
+    thisBox.css({"background": "url('http://www.festadocovid.com/game/img/corona.png')", "background-size":"contain"});
   }
   
   //insert box element
@@ -77,7 +77,7 @@ function finishGame(){
 	clearInterval( runGame );
 	runGame = 0;
 
-	alert("Game over !\n" + score + " COVIDados.");
+	alert( score + " Zé Povinho salvo" + ((score==1 || score==-1 )? "" : "s") + " do COVID.\n\nGame over !");
 }
 
 
