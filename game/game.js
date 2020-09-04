@@ -76,18 +76,15 @@ function countdown() {
 	    function tick() {
 	        var counter = document.getElementById("counter");
 	        seconds--;
-	        counter.innerHTML = (seconds < 10 ? "0" : "")  + String(seconds) + "S";
+	        counter.innerHTML = (seconds < 10 ? "0" : "")  + String(seconds) + " S";
 	        if( seconds > 0 ) {
 	            setTimeout(tick, 1000);
-	            draw();
-	   			update();
+	            //draw();
+	   			//update();
 	        } else {
-	            alert("Game over");
 	            clearInterval(runGame);
+	            alert("Game over");
 	        }
 	    }
     	tick();
 	}
-
-countdown();
-
