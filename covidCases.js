@@ -1,6 +1,6 @@
 
 
-var NUMBER_OF_PEOPLE_MAX = 100000;
+var NUMBER_OF_PEOPLE_MAX = 30000;
 
 function calculateNumberOfCases() {
 
