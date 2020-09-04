@@ -1,6 +1,6 @@
 var EVENT_START_DATE = new Date(2020, 08, 04, 15)
 var EVENT_END_DATE = new Date(2020, 08, 06, 23)
-
+var player;
 
 $(document).ready(function () {
     initSound();
@@ -11,15 +11,14 @@ $(document).ready(function () {
         animateCovid($(e));
     });
     $('#start-game').click(function (e) {
-        alert('Vamos infectar os camaradas todos.');
+        alert('Infecta todos os Camaradas!');
         startGame();
     });
 });
 
 function initSound() {
-    var player = new Howl({
+    player = new Howl({
         src: ['mp3/carvalhesa.mp3'],
-        autoplay: true,
         loop: true,
         volume: 0.5
     });
@@ -51,7 +50,7 @@ function generateCovid() {
 
     var createCovids = numberOfCovids - existingCovids;
     for (var n = 0; n < createCovids; ++n) {
-        $("body").append("<img src='images/covid.png' class='covid' width='100' heigh='100' />")
+        $(".container").append("<img src='images/covid.png' class='covid' width='100' heigh='100' />")
     }
 }
 
@@ -98,105 +97,111 @@ function calcSpeed(prev, next) {
 }
 
 /************** INFECTA O CAMARADA */
+var runGame = 0;
 var score = 0;
-var color = "blue";
 
-function random(min, max) {
-    return Math.round(Math.random() * (max - min) + min);
-}
 
-function setBG() {
-    if (Math.round(Math.random())) {
-        return "/game/img/corona.png";
-    } else {
-        return "/game/img/ze-povinho.png";
-    }
+function random(min,max){
+ 	return Math.round(Math.random() * (max-min) + min);
 }
 
 
-
-function dropBox() {
-    var length = random(100, ($(".game").width() - 100));
-    var velocity = random(850, 10000);
-    var size = random(50, 150);
-    var thisBox = $("<div/>", {
-        class: "box",
-        style: "width:" + size + "px; height:" + size + "px; left:" + length + "px; transition: transform " + velocity + "ms linear;"
-    });
-
-    //set data and bg based on data
-    thisBox.data("test", Math.round(Math.random()));
-    if (thisBox.data("test")) {
-        thisBox.css({ "background": "url('http://www.festadocovid.com/game/img/corona.png')", "background-size": "contain" });
-    } else {
-        thisBox.css({ "background": "url('http://www.festadocovid.com/game/img/ze-povinho.png')", "background-size": "contain" });
-    }
-
-
-    //insert gift element
-    $(".game").append(thisBox);
-
-    //random start for animation
-    setTimeout(function () {
-        thisBox.addClass("move");
-    }, random(0, 5000));
-
-    //remove this object when animation is over
-    thisBox.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend",
-        function (event) {
-            $(this).remove();
-        });
+function dropBox(){
+  var gameDiv = $(".game");
+  var length = random(100, (gameDiv.width() - 100));
+  var velocity = random(850, 10000);
+  var size = random(50, 150);
+  var thisBox = $("<div/>", {
+    class: "box",
+    style:  "width:" +size+ "px; height:"+size+"px; left:" + length+  "px; transition: transform " +velocity+ "ms linear;"
+  });
+  
+  //set data and bg based on data
+  thisBox.data("test", Math.round(Math.random()));
+  if(thisBox.data("test")){
+    thisBox.css({"background": "url('https://www.festadocovid.com/game/img/ze-povinho.png')", "background-size":"contain"});
+  } else {
+    thisBox.css({"background": "url('https://www.festadocovid.com/game/img/corona.png')", "background-size":"contain"});
+  }
+  
+  //insert box element
+  gameDiv.append(thisBox);
+  
+  //random start for animation
+  setTimeout(function(){
+    thisBox.addClass("move");
+  }, random(0, 5000) );
+  
+  //remove this object when animation is over
+  thisBox.one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend",
+    function(event) {
+    	$(this).remove();
+  	});
 }
 
 
-$(document).on('click', '.box', function () {
-
-
-    if ($(this).data("test")) {
-        score += 1;
-    } else {
-        score -= 1;
-    }
-
-    $(".score").html(score);
-    $(this).remove();
+$(document).on('click', '.box', function(){
+  
+  if($(this).data("test")){
+    score += 1;
+  } else {
+    score -= 1;
+  }
+  
+  $(".score").html(score);
+  $(this).remove();
 });
 
 
-
 function countdown() {
-    var seconds = 5;
-    function tick() {
-        var counter = document.getElementById("counter");
-        seconds--;
-        counter.innerHTML = (seconds < 10 ? "0" : "") + String(seconds) + "S";
-        if (seconds > 0) {
-            setTimeout(tick, 1000);
-            draw();
-            update();
-        } else {
-            alert("Game over");
-            clearInterval(runGame);
-            $('.game').hide();
-        }
-    }
-    tick();
+    	var seconds = 30;
+
+	    function tick() {
+	        var counter = document.getElementById("counter");
+
+            seconds--;
+	        counter.innerHTML = (seconds < 10 ? "0" : "")  + String(seconds) + " S";
+
+	        if( seconds > 0 ) {
+	            setTimeout(tick, 1000);
+	        } else {
+	        	finishGame();
+	        }
+	    }
+
+    	tick();
+	}
+
+
+function finishGame(){
+    player.stop();
+    clearInterval( runGame );
+    $('.game').remove();
+    $('.container').show();
+	runGame = 0;
+    alert( score + " Camaradas Infectados\n\nGame over !");
+    score = 0;
 }
 
-var runGame = setInterval(function () {
-    for (i = 0; i < 10; i++) {
-        dropBox();
-    }
-}, 5000);
-
-function startGame() {
-    $('.game').show();
-    for (i = 0; i < 10; i++) {
-        dropBox();
-    }
-
-    countdown();
+function initGameContainer() {
+    $('body').append("<div class=\"game\"><div class=\"game-counter\" id=\"counter\">00s</div><div class=\"score\">00</div></div>");
 }
 
+function startGame(){
+    player.play();
+    initGameContainer();
+    $('.container').hide();
+	for (i = 0; i < 10; i++) { 
+	  dropBox();
+	}
 
+	runGame =
+		setInterval(
+			function(){
+                for (i = 0; i < 5; i++) { 
+                  dropBox();
+                }  
+            }, 2500);
 
+	countdown();
+}
