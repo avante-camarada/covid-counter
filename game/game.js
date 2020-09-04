@@ -8,7 +8,8 @@ function random(min,max){
 
 
 function dropBox(){
-  var length = random(100, ($(".game").width() - 100));
+  var gameDiv = $(".game");
+  var length = random(100, (gameDiv.width() - 100));
   var velocity = random(850, 10000);
   var size = random(50, 150);
   var thisBox = $("<div/>", {
@@ -25,7 +26,7 @@ function dropBox(){
   }
   
   //insert box element
-  $(".game").append(thisBox);
+  gameDiv.append(thisBox);
   
   //random start for animation
   setTimeout(function(){
