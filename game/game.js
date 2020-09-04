@@ -19,9 +19,9 @@ function dropBox(){
   //set data and bg based on data
   thisBox.data("test", Math.round(Math.random()));
   if(thisBox.data("test")){
-    thisBox.css({"background": "url('http://www.festadocovid.com/game/img/ze-povinho.png')", "background-size":"contain"});
+    thisBox.css({"background": "url('https://www.festadocovid.com/game/img/ze-povinho.png')", "background-size":"contain"});
   } else {
-    thisBox.css({"background": "url('http://www.festadocovid.com/game/img/corona.png')", "background-size":"contain"});
+    thisBox.css({"background": "url('https://www.festadocovid.com/game/img/corona.png')", "background-size":"contain"});
   }
   
   //insert box element
