@@ -1,6 +1,8 @@
 var runGame = 0;
 var score = 0;
 
+var gameEndCallback = null;
+
 
 function random(min,max){
  	return Math.round(Math.random() * (max-min) + min);
@@ -55,7 +57,7 @@ $(document).on('click', '.box', function(){
 
 
 function countdown() {
-    	var seconds = 60;
+    	var seconds = 30;
 
 	    function tick() {
 	        var counter = document.getElementById("counter");
@@ -78,11 +80,18 @@ function finishGame(){
 	clearInterval( runGame );
 	runGame = 0;
 
-	alert( score + " Zé Povinho\nsalvo" + ((score==1 || score==-1 )? "" : "s") + " do COVID.\n\nGame over !");
+	alert( score + " Camaradas Infectados\n\nGame over !");
+
+	if( gameEndCallback ){
+    	gameEndCallback();
+	}
 }
 
 
-function startGame(){
+function startGame( endCallback ){
+	gameEndCallback = endCallback;
+	score = 0
+
 	for (i = 0; i < 10; i++) { 
 	  dropBox();
 	}
