@@ -174,13 +174,15 @@ function countdown() {
 
 
 function finishGame(){
-    player.stop();
-    clearInterval( runGame );
-    $('.game').remove();
-    $('.container').show();
-	runGame = 0;
-    alert( score + " Camaradas Infectados\n\nGame over !");
-    score = 0;
+  clearInterval( runGame );
+  runGame = 0;
+
+  player.stop();
+
+  $('.fullHeight').remove();
+  $('.container').show();
+
+  alert( score + " Camaradas Infectados\n\nGame over !");
 }
 
 function initGameContainer() {
@@ -188,9 +190,13 @@ function initGameContainer() {
 }
 
 function startGame(){
-    player.play();
-    initGameContainer();
-    $('.container').hide();
+  score = 0;
+
+  player.play();
+
+  initGameContainer();
+  $('.container').hide();
+
 	for (i = 0; i < 10; i++) { 
 	  dropBox();
 	}
@@ -198,10 +204,10 @@ function startGame(){
 	runGame =
 		setInterval(
 			function(){
-                for (i = 0; i < 5; i++) { 
-                  dropBox();
-                }  
-            }, 2500);
+        for (i = 0; i < 5; i++) {
+          dropBox();
+        }
+      }, 2500);
 
 	countdown();
 }
