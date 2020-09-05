@@ -184,7 +184,7 @@ function finishGame(){
 }
 
 function initGameContainer() {
-    $('body').append("<div class=\"game\"><div class=\"game-counter\" id=\"counter\">00s</div><div class=\"score\">00</div></div>");
+    $('body').append("<div class=\"fullHeight\"><div class=\"game\"><div class=\"game-counter\" id=\"counter\">00s</div><div class=\"score\">0</div></div></div>");
 }
 
 function startGame(){
