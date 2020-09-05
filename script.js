@@ -50,21 +50,21 @@ function generateCovid() {
 
     var createCovids = numberOfCovids - existingCovids;
     for (var n = 0; n < createCovids; ++n) {
-        $(".container").append("<img src='images/covid.png' class='covid' width='100' heigh='100' />")
+        $(".container").append("<img src='images/covid.png' class='covid' width='100px' heigh='100px' />")
     }
 }
 
-function makeNewPosition($container) {
+function makeNewPosition($target) {
 
     // Get viewport dimensions (remove the dimension of the div)
     $container = $(window)
-    var h = $container.height() - 50;
-    var w = $container.width() - 50;
+    var h = $container.height() - $target.height();
+    var w = $container.width() - $target.width();
 
     var nh = Math.floor(Math.random() * h);
     var nw = Math.floor(Math.random() * w);
 
-    return [nh, nw];
+    return [ nh, nw ];
 
 }
 
